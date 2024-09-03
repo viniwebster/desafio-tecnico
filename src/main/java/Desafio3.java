@@ -8,12 +8,14 @@ import java.util.*;
 public class Desafio3 {
     public static void main(String[] args) {
 
+        Locale.setDefault(Locale.US);
+
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode;
 
         List<Double> list = new ArrayList<>();
         try {
-            jsonNode = objectMapper.readValue(new File("src/main/java/faturamento.json"), JsonNode.class);
+            jsonNode = objectMapper.readValue(new File("src/main/java/dados.json"), JsonNode.class);
             for (JsonNode node : jsonNode) {
                 double valor = node.get("valor").asDouble();
                 list.add(valor);
@@ -35,9 +37,10 @@ public class Desafio3 {
             }
         }
 
-        System.out.println("O faturamento total foi de: " + total);
-        System.out.println("O maior faturamento foi de: " + maiorFaturamento);
-        System.out.println("O menor faturamento foi de: " + menorFaturamento);
-        System.out.println("Numero de dias que superaram o faturamento diário: " + dias);
+        System.out.println("O faturamento total foi de: " + String.format("%.2f", total));
+        System.out.println("A média de faturamento foi de: " + String.format("%.2f", media));
+        System.out.println("O maior faturamento foi de: " + String.format("%.2f", maiorFaturamento));
+        System.out.println("O menor faturamento foi de: " + String.format("%.2f", menorFaturamento));
+        System.out.println("Numero de dias que superaram a média do faturamento diário: " + dias);
     }
 }
